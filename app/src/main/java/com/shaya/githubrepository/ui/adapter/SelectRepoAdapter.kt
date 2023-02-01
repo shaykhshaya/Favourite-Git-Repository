@@ -1,16 +1,12 @@
 package com.shaya.githubrepository.ui.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.shaya.githubrepository.data.RoomItem
 import com.shaya.githubrepository.databinding.SelectRepoItemBinding
 import com.shaya.githubrepository.network.responses.Item
-import com.shaya.githubrepository.ui.activity.AddActivity
 
 class SelectRepoAdapter(val callback: (Item) -> Unit, val callbackAddItem: (Item) -> Unit): ListAdapter<Item,
         SelectRepoAdapter.ItemSelectViewHolder>(DiffCallback) {
@@ -35,8 +31,11 @@ class SelectRepoAdapter(val callback: (Item) -> Unit, val callbackAddItem: (Item
 
     override fun onBindViewHolder(holder: ItemSelectViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.itemView.setOnClickListener {
+        holder.binding.textRepo.setOnClickListener {
             callback(currentItem)
+        }
+        holder.binding.textOwner.setOnClickListener {
+            holder.binding.textRepo.performClick()
         }
 
         holder.bind(currentItem)

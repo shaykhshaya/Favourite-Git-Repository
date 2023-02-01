@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.shaya.githubrepository.data.RoomItem
 import com.shaya.githubrepository.databinding.ActivitySelectRepoBinding
-import com.shaya.githubrepository.network.responses.Item
 import com.shaya.githubrepository.ui.adapter.SelectRepoAdapter
 import com.shaya.githubrepository.ui.viewmodel.RepoListViewModel
 import com.shaya.githubrepository.ui.viewmodel.SelectRepoViewModel
@@ -48,15 +47,7 @@ binding.selectRepoRecyclerView.adapter = SelectRepoAdapter(
         //finish()
     },
     callbackAddItem = {
-
-        val intent = Intent(this, AddActivity::class.java)
-
-        intent.putExtra("Owner", it.owner?.login.toString())
-        intent.putExtra("Repository", it.name.toString())
-        intent.putExtra("Description", it.description.toString())
-        intent.putExtra("url", it.html_url.toString())
-        startActivity(intent)
-
+        AddRepoBottomSheet(it).show(supportFragmentManager, AddRepoBottomSheet::class.java.name)
     }
 
 )

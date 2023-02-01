@@ -29,10 +29,10 @@ class RepoListAdapter(private val onItemClicked : (RoomItem) -> Unit, val callba
 
     override fun onBindViewHolder(holder: RepoListViewHolder, position: Int) {
         val current = getItem(position)
-        holder.itemView.setOnClickListener {
+        holder.binding.textRepo.setOnClickListener {
             onItemClicked(current)
-
         }
+
         holder.bind(current)
         holder.binding.btnShare.setOnClickListener {
             callbackShareItem(current)
