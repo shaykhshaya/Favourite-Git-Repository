@@ -59,7 +59,7 @@
         android:layout_marginStart="24dp" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextFirstNameLayout"
+        android:id="@+id/editTextOwnerNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -79,15 +79,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_continue">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextFirstName"
+            android:id="@+id/editTextOwnerName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionNext"
-            android:maxLength="10" />
+             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextLastNameLayout"
+        android:id="@+id/editTextRepositoryLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -105,13 +105,13 @@
         app:hintTextColor="@color/purple_700"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextFirstNameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/editTextOwnerNameLayout">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextLastName"
+            android:id="@+id/editTextRepository"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:imeOptions="actionNext"
-            android:maxLength="10" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -123,7 +123,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextLastNameLayout">
+        app:layout_constraintTop_toBottomOf="@id/editTextRepositoryLayout">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_add"
             android:layout_width="match_parent"
