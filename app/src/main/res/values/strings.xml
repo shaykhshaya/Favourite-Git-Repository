@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GitHub Repository</string>
+    <string name="track_your_nfavourite_repositories">Track Your\nFavourite Repositories</string>
+    <string name="add_nrepository">Add\nRepository</string>
+    <string name="github">GitHub</string>
+    <string name="enter_owner_name">Enter Owner Name</string>
+    <string name="enter_repository_name">Enter Repository Name</string>
+    <string name="add_repository">Add Repository</string>
 </resources>
