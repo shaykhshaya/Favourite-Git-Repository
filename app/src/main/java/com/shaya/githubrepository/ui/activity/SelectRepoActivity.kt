@@ -10,6 +10,7 @@ import com.shaya.githubrepository.databinding.ActivitySelectRepoBinding
 import com.shaya.githubrepository.ui.adapter.SelectRepoAdapter
 import com.shaya.githubrepository.ui.viewmodel.RepoListViewModel
 import com.shaya.githubrepository.ui.viewmodel.SelectRepoViewModel
+import com.shaya.githubrepository.utils.openLink
 
 class SelectRepoActivity : AppCompatActivity() {
 
@@ -21,54 +22,26 @@ class SelectRepoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         viewModel = ViewModelProvider(this)[SelectRepoViewModel::class.java]
         roomViewModel = ViewModelProvider(this)[RepoListViewModel::class.java]
-
         binding.apply {
             viewModel = this@SelectRepoActivity.viewModel
             lifecycleOwner = this@SelectRepoActivity
         }
-
-
-binding.selectRepoRecyclerView.adapter = SelectRepoAdapter(
-    callback = {
-        val roomItem = RoomItem(
-            name = it.name.toString(), owner = it.owner?.login.toString(), description = it.description.toString(), url = it.html_url.toString()
-        )
-
-        intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(roomItem.url)
-        startActivity(intent)
-
-
-
-        //roomViewModel.addNewItem(roomItem)
-        //finish()
-    },
-    callbackAddItem = {
-        AddRepoBottomSheet(it).show(supportFragmentManager, AddRepoBottomSheet::class.java.name)
+        initViews()
     }
 
-)
-        /*binding.selectRepoRecyclerView.adapter = SelectRepoAdapter{
-            val roomItem = RoomItem(
-                 name = it.name.toString(), owner = it.owner?.login.toString(), description = it.description.toString(), url = it.html_url.toString()
-            )
-
-            intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(roomItem.url)
-            startActivity(intent)
-
-
-
-            //roomViewModel.addNewItem(roomItem)
-            //finish()
-        }*/
-
-
-
-
-
+    private fun initViews() {
+        binding.selectRepoRecyclerView.adapter = SelectRepoAdapter(
+            callbackShareRepo = {
+                openLink(it.html_url.toString())
+            },
+            callbackAddItem = {
+                AddRepoBottomSheet(it).show(
+                    supportFragmentManager,
+                    AddRepoBottomSheet::class.java.name
+                )
+            }
+        )
     }
 }

@@ -25,9 +25,6 @@ class RepoListViewModel: ViewModel() {
         }
     }
 
-
-
-
     fun retrieveItem(id: Int): LiveData<RoomItem> {
         return roomItemDao.getItem(id).asLiveData()
     }

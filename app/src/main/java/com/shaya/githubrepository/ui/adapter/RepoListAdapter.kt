@@ -7,19 +7,18 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.shaya.githubrepository.data.RoomItem
 import com.shaya.githubrepository.databinding.ListItemBinding
-import com.shaya.githubrepository.network.responses.Item
 
-class RepoListAdapter(private val onItemClicked : (RoomItem) -> Unit, val callbackShareItem: (RoomItem) -> Unit): ListAdapter<RoomItem, RepoListAdapter.RepoListViewHolder>(DiffCall) {
+class RepoListAdapter(
+    private val onRepoClicked: (RoomItem) -> Unit, val callbackShareItem: (RoomItem) -> Unit
+) : ListAdapter<RoomItem, RepoListAdapter.RepoListViewHolder>(DiffCall) {
 
-    class RepoListViewHolder(val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(roomItem: RoomItem){
+    class RepoListViewHolder(val binding: ListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(roomItem: RoomItem) {
             binding.apply {
                 textRepo.text = roomItem.name
                 textDescription.text = roomItem.description
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoListViewHolder {
@@ -30,7 +29,7 @@ class RepoListAdapter(private val onItemClicked : (RoomItem) -> Unit, val callba
     override fun onBindViewHolder(holder: RepoListViewHolder, position: Int) {
         val current = getItem(position)
         holder.binding.textRepo.setOnClickListener {
-            onItemClicked(current)
+            onRepoClicked(current)
         }
 
         holder.bind(current)
@@ -38,7 +37,6 @@ class RepoListAdapter(private val onItemClicked : (RoomItem) -> Unit, val callba
             callbackShareItem(current)
         }
     }
-
 
     companion object {
         private val DiffCall = object : DiffUtil.ItemCallback<RoomItem>() {
@@ -51,7 +49,5 @@ class RepoListAdapter(private val onItemClicked : (RoomItem) -> Unit, val callba
             }
         }
     }
-
-
 
 }

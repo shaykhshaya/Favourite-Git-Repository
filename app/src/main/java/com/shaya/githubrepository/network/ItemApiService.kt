@@ -28,7 +28,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ItemApiService {
     @GET(end_point)
-    suspend fun getItems():GithubResponse
+    suspend fun getFavouriteRepositories(): GithubResponse
 }
 
 object ItemApi {

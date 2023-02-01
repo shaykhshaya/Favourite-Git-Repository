@@ -8,31 +8,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.shaya.githubrepository.databinding.SelectRepoItemBinding
 import com.shaya.githubrepository.network.responses.Item
 
-class SelectRepoAdapter(val callback: (Item) -> Unit, val callbackAddItem: (Item) -> Unit): ListAdapter<Item,
+class SelectRepoAdapter(
+    val callbackShareRepo: (Item) -> Unit,
+    val callbackAddItem: (Item) -> Unit
+) : ListAdapter<Item,
         SelectRepoAdapter.ItemSelectViewHolder>(DiffCallback) {
 
-    class ItemSelectViewHolder(var binding: SelectRepoItemBinding): RecyclerView.ViewHolder(binding.root){
-
-        fun bind(item: Item){
+    class ItemSelectViewHolder(var binding: SelectRepoItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Item) {
             binding.textRepo.text = item.name
             binding.textOwner.text = item.owner?.login
             binding.textDescription.text = item.description
 
         }
-
-
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSelectViewHolder {
-        val adapterLayout = SelectRepoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false )
+        val adapterLayout =
+            SelectRepoItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ItemSelectViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: ItemSelectViewHolder, position: Int) {
         val currentItem = getItem(position)
         holder.binding.textRepo.setOnClickListener {
-            callback(currentItem)
+            callbackShareRepo(currentItem)
         }
         holder.binding.textOwner.setOnClickListener {
             holder.binding.textRepo.performClick()
@@ -45,8 +46,7 @@ class SelectRepoAdapter(val callback: (Item) -> Unit, val callbackAddItem: (Item
 
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<Item>()
-    {
+    companion object DiffCallback : DiffUtil.ItemCallback<Item>() {
         override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.id == newItem.id
         }
@@ -54,8 +54,6 @@ class SelectRepoAdapter(val callback: (Item) -> Unit, val callbackAddItem: (Item
         override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
             return oldItem.id == newItem.id
         }
-
     }
-
 
 }

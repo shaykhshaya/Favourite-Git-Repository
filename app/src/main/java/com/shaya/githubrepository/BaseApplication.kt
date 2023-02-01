@@ -3,8 +3,7 @@ package com.shaya.githubrepository
 import android.app.Application
 import com.shaya.githubrepository.data.RoomItemDatabase
 
-class BaseApplication: Application() {
-
+class BaseApplication : Application() {
 
     companion object {
         lateinit var instance: BaseApplication
@@ -16,7 +15,5 @@ class BaseApplication: Application() {
         instance = this
         database = RoomItemDatabase.getDatabase(this)
     }
-
-
 
 }

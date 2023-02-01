@@ -8,7 +8,7 @@ import com.shaya.githubrepository.network.ItemApi
 import com.shaya.githubrepository.network.responses.Item
 import kotlinx.coroutines.launch
 
-enum class ItemApiStatus {LOADING, ERROR, DONE}
+enum class ItemApiStatus { LOADING, ERROR, DONE }
 
 class SelectRepoViewModel : ViewModel() {
 
@@ -22,21 +22,18 @@ class SelectRepoViewModel : ViewModel() {
         getItemList()
     }
 
-    private fun getItemList(){
+    private fun getItemList() {
         viewModelScope.launch {
             _status.value = ItemApiStatus.LOADING
             try {
-                _items.value = ItemApi.retrofitService.getItems().items
+                _items.value = ItemApi.retrofitService.getFavouriteRepositories().items
                 _status.value = ItemApiStatus.DONE
-            }
-            catch (e:Exception){
+            } catch (e: Exception) {
                 _status.value = ItemApiStatus.ERROR
                 _items.value = listOf()
             }
         }
     }
-
-
 
 
 }

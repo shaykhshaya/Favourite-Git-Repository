@@ -29,7 +29,11 @@ class AddRepoBottomSheet(private val item: Item) : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         roomViewModel = ViewModelProvider(this)[RepoListViewModel::class.java]
+        initViews()
+    }
 
+
+    private fun initViews() {
         binding.apply {
             textRepo.text = item.name
             textDescription.text = item.description
@@ -41,7 +45,6 @@ class AddRepoBottomSheet(private val item: Item) : BottomSheetDialogFragment() {
         }
 
         binding.btnAdd.setOnClickListener {
-
             val updatedRepo = binding.editTextRepository.text.toString()
             val updatedOwner = binding.editTextOwnerName.text.toString()
             roomViewModel.addNewItem(
@@ -54,7 +57,6 @@ class AddRepoBottomSheet(private val item: Item) : BottomSheetDialogFragment() {
             )
             requireActivity().finish()
         }
-
     }
 
 }
